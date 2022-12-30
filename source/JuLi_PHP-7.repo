@@ -1,6 +1,0 @@
-[JuLi_PHP]
-name=JuLi_PHP
-baseurl=https://yum_host/php/el7/
-enabled=1
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
