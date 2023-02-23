@@ -12,7 +12,7 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/shirle
 ```
 
 ## 编译说明
-* 先安装GCC yum -y install gcc gcc++ gdb 
+* 先安装GCC: yum -y install gcc gcc++ gdb 
 * 编译 gcc -o fast.bin newfast.c
 * 执行 ./fast.bin
 
@@ -41,8 +41,13 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/shirle
 ## 免责声明
 * 此脚本仅用适用于测试学习，不可用于非法或商业用途，严禁用于任何违法违规用途
 * 流控版权为筑梦冬瓜所有！！
-* 所有文件（部分C语言文件 筑梦冬瓜 没有开源，我也没有！）没有任何后门，脚本已开源，欢迎检查，不放心的不要用，不要用！不要用！不要用！！ 谢谢！
-* 此版本与官方版本完全相同，只删除了授权文件，没有任何后门、广告，不放心的不要用，不要用！不要用！不要用！！ 谢谢！
+* 所有文件（部分C语言文件 筑梦冬瓜 没有开源，我也没有！）我个人没有加入任何后门，脚本已开源，欢迎检查，不放心的不要用，不要用！不要用！不要用！！ 谢谢！
+* 此版本与官方版本完全相同，只删除了授权文件，我个人没有加入任何后门、广告，不放心的不要用，不要用！不要用！不要用！！ 谢谢！
+* ------------------------------
+* 部分大厂服务器(如阿里云腾讯云) 会报毒 webshell漏洞文件（这个文件是筑梦冬瓜留下的，不关本人的事），这个漏洞文件位于 /var/www/html/admin/fas_service.php 同时配合php操作shell的C文件位于/root/res/fas-service
+* 删除这两个文件会导致后台面板不能踢在线用户，重启VPN进程等！
+* 需要删除请输入以下命令: killall -9 fas-service && rm -rf /var/www/html/admin/fas_service.php /root/res/fas-service 
+* 还有一个php文件位于 /var/www/html/system.php 文件中的自定义函数 systemi() ，您可以手动删除这个 systemi() 函数！！！
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
