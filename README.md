@@ -44,7 +44,7 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/shirle
 * 所有文件（部分C语言文件 筑梦冬瓜 没有开源，我也没有！）我个人没有加入任何后门，脚本已开源，欢迎检查，不放心的不要用，不要用！不要用！不要用！！ 谢谢！
 * 此版本与官方版本完全相同，只删除了授权文件，我个人没有加入任何后门、广告，不放心的不要用，不要用！不要用！不要用！！ 谢谢！
 ## 其他声明
-* 部分大厂服务器(如阿里云腾讯云) 会报毒 webshell漏洞文件（这个文件是筑梦冬瓜留下的，不关本人的事），这个漏洞文件位于 /var/www/html/admin/fas_service.php 同时配合php操作shell的C文件位于/root/res/fas-service
+* 流控搭建后部分大厂服务器(如阿里云腾讯云) 会报毒 webshell 漏洞文件（这个文件是筑梦冬瓜留下的，不关本人的事），这个漏洞文件位于 /var/www/html/admin/fas_service.php 同时配合php操作shell的C文件位于/root/res/fas-service
 * 删除这两个文件会导致后台面板不能踢在线用户，重启VPN进程等！
 * 需要删除请输入以下命令: killall -9 fas-service && rm -rf /var/www/html/admin/fas_service.php /root/res/fas-service 
 * 还有一个php文件位于 /var/www/html/system.php 文件中的自定义函数 systemi() ，您可以手动删除这个 systemi() 函数！！！
