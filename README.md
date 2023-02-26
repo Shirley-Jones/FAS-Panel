@@ -50,6 +50,9 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/shirle
 * 还有一个php文件位于 /var/www/html/system.php 文件中的自定义函数 systemi() ，您可以手动删除这个 systemi() 函数！！！
 ## 温馨提醒
 * 如果需要二次开发FAS流控，请注意检查FAS的PHP文件！例如 Core/fun/function.fun.php，并且不要使用FAS的流量监控 FasAUTH.bin，其他文件目前没发现什么问题~
+* 脚本资源下载地址请搜索变量关键词 Download_Host 自行替换！
+* 脚本资源下载地址请搜索变量关键词 Download_Host 自行替换！
+* 脚本资源下载地址请搜索变量关键词 Download_Host 自行替换！
 * 
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
