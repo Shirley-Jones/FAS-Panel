@@ -2,8 +2,8 @@
 ## 准备工作
 * 准备一台CentOS7 x64服务器 (推荐腾讯云 阿里云 IDC大宽带)
 * CPU/内存：服务器配置最低1核1G
-* 带宽：推荐5M以上
-* 网络：必须具有固定公网IP
+* 带宽：推荐8Mbps以上
+* 网络：必须具有固定公网IP（IPV4）
 
 ## 安装脚本
 如果出现安装失败，请全格重装系统，手动更新yum源后重新执行安装脚本即可。
@@ -21,7 +21,7 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 
 > 重启流控 vpn restart
 
-> 开端口 port
+> 开端口 vpn port
 
 > 查系统版本 cat /etc/redhat-release
 
@@ -39,6 +39,7 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 
 
 ## 免责声明
+* 脚本写的很辣鸡，还请大佬多多包涵。
 * 本脚本仅用于学习交流，禁止商业，下载安装后请在24小时内删除！
 * 我们只删除了流控授权部分，其余代码均未修改。
 * 流控版权为筑梦网络科技(筑梦工作室)所有！！
@@ -56,5 +57,6 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
+* 有问题请反馈至: xshirleyjones02@gmail.com (仅处理脚本搭建报错问题，逻辑错误问题。)
 
 
