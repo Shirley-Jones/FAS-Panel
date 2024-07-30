@@ -57,6 +57,5 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
 * 任何问题不要问我，不要问我，不要问我。
-* 有问题请反馈至: xshirleyjones02@gmail.com (仅处理脚本搭建报错问题，逻辑错误问题。)
 
 
