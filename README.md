@@ -43,7 +43,7 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 * 本脚本仅用于学习交流，禁止商业，下载安装后请在24小时内删除！
 * 我们只删除了流控授权部分，其余代码均未修改。
 * 流控版权为筑梦网络科技(筑梦工作室)所有！！
-* FAS流控官网: https://www.dingd.cn
+* FAS流控官网: https://www.dingd.cn (已下线)
 * 所有文件（部分C语言文件 筑梦冬瓜 没有开源，我也没有！）我个人没有加入任何后门，脚本已全部开源，欢迎检查，不放心的不要用， 谢谢！
 
 ## 其他声明
