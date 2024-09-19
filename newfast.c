@@ -13,13 +13,13 @@
 #define FAS_Version "3.0"
 #define Dingd_Name "筑梦工作室 冬瓜"
 #define FAS_Name "FAS网络用户管理"  
-#define Scripts_Time "2022.12.30 20.25"  
+#define Scripts_Time "2024.09.19 22.25"  
 /*
 	版权说明: 
 	
 	流控版权为筑梦网络科技(筑梦工作室)所有！！
 	
-	FAS流控官网: https://www.dingd.cn
+	FAS流控官网: https://www.dingd.cn 已下线
 */
 
 /*	
@@ -313,227 +313,6 @@ void GET_IP()
 	}
 }
 
-
-
-/*
-
-void FAS_On_MySQL(char* IP)
-{
-	
-	
-	
-	//主机开启远程数据库访问权限
-	
-	
-	printf("\n请输入本机IP: ");
-	char MySQL_Host[20];
-	gets(MySQL_Host);
-	if (strcmp(MySQL_Host,"")==0){
-		strcpy(MySQL_Host,IP);
-		printf("已输入本机IP为: %s\n",MySQL_Host);
-	}else{
-		printf("已输入本机IP为: %s\n",MySQL_Host);
-	}
-	sleep(1);
-	
-	printf("\n请输入本机数据库端口: ");
-	char MySQL_Port[20];
-	gets(MySQL_Port);
-	if (strcmp(MySQL_Port,"")==0){
-		strcpy(MySQL_Port,"3306");
-		printf("已输入本机数据库端口为: %s\n",MySQL_Port);
-	}else{
-		printf("已输入本机数据库端口为: %s\n",MySQL_Port);
-	}
-	sleep(1);
-	
-	
-	printf("\n请输入本机数据库账户: ");
-	char MySQL_User[20];
-	gets(MySQL_User);
-	if (strcmp(MySQL_User,"")==0){
-		strcpy(MySQL_User,"");
-		printf("已输入本机数据库账户为: %s\n",MySQL_User);
-	}else{
-		printf("已输入本机数据库账户为: %s\n",MySQL_User);
-	}
-	sleep(1);
-	
-	printf("\n请输入本机数据库密码: ");
-	char MySQL_Pass[20];
-	gets(MySQL_Pass);
-	if (strcmp(MySQL_Pass,"")==0){
-		strcpy(MySQL_Pass,"");
-		printf("已输入本机数据库密码为: %s\n",MySQL_Pass);
-	}else{
-		printf("已输入本机数据库密码为: %s\n",MySQL_Pass);
-	}
-	sleep(1);
-	
-	
-	printf("\n操作中... \n");
-	
-	checkcode(runshell(5,"iptables -A INPUT -p tcp -m tcp --dport 3306 -j ACCEPT"));
-	checkcode(runshell(5,"service iptables save >/dev/null 2>&1"));
-	checkcode(runshell(5,"systemctl restart iptables.service"));
-	
-	char FAS_On_MySQL1[200];
-	sprintf(FAS_On_MySQL1,"mysql -h%s -P%s -u%s -p%s -e \"grant all privileges on *.* to '%s'@'%' identified by '%s' with grant option;flush privileges;\"",MySQL_Host,MySQL_Port,MySQL_User,MySQL_Pass,MySQL_User,MySQL_Pass);
-	checkcode(runshell(5,FAS_On_MySQL1));
-	
-	setbuf(stdout,NULL);
-	system("systemctl restart mariadb.service");
-	
-	
-	
-	
-	printf("\n操作已完成。 \n");
-	exit(0);
-	
-	
-	
-	
-}
-
-
-
-
-
-void FAS_Node_for_MySQL(char* IP)
-{
-	
-	
-	
-	//节点机器对接主机数据库.  或者云库
-	
-	
-	printf("\n请输入主机IP/云库域名: ");
-	char FAS_Node_for_MySQL_IP[20];
-	gets(FAS_Node_for_MySQL_IP);
-	if (strcmp(FAS_Node_for_MySQL_IP,"")==0){
-		strcpy(FAS_Node_for_MySQL_IP,"");
-		printf("\n已输入主机IP为: %s\n",FAS_Node_for_MySQL_IP);
-	}else{
-		printf("\n已输入主机IP为: %s\n",FAS_Node_for_MySQL_IP);
-	}
-	sleep(1);
-	
-	printf("\n请输入主机数据库端口: ");
-	char FAS_Node_for_MySQL_Port[20];
-	gets(FAS_Node_for_MySQL_Port);
-	if (strcmp(FAS_Node_for_MySQL_Port,"")==0){
-		strcpy(FAS_Node_for_MySQL_Port,"");
-		printf("\n已输入主机数据库端口为: %s\n",FAS_Node_for_MySQL_Port);
-	}else{
-		printf("\n已输入主机数据库端口为: %s\n",FAS_Node_for_MySQL_Port);
-	}
-	sleep(1);
-	
-	
-	printf("\n请输入主机数据库账户: ");
-	char FAS_Node_for_MySQL_User[20];
-	gets(FAS_Node_for_MySQL_User);
-	if (strcmp(FAS_Node_for_MySQL_User,"")==0){
-		strcpy(FAS_Node_for_MySQL_User,"");
-		printf("\n已输入主机数据库账户为: %s\n",FAS_Node_for_MySQL_User);
-	}else{
-		printf("\n已输入主机数据库账户为: %s\n",FAS_Node_for_MySQL_User);
-	}
-	sleep(1);
-	
-	printf("\n请输入主机数据库密码: ");
-	char FAS_Node_for_MySQL_Pass[20];
-	gets(FAS_Node_for_MySQL_Pass);
-	if (strcmp(FAS_Node_for_MySQL_Pass,"")==0){
-		strcpy(FAS_Node_for_MySQL_Pass,"");
-		printf("\n已输入主机数据库密码为: %s\n",FAS_Node_for_MySQL_Pass);
-	}else{
-		printf("\n已输入主机数据库密码为: %s\n",FAS_Node_for_MySQL_Pass);
-	}
-	sleep(1);
-	
-	
-	printf("\n操作中... \n");
-	
-	
-	//删除配置文件
-	checkcode(runshell(5,"rm -rf /etc/openvpn/auth_config.conf"));
-	checkcode(runshell(5,"rm -rf /var/www/html/config.php"));
-	
-	//创建新的配置文件auth_config
-	char ADD_auth_config[200];
-	sprintf(ADD_auth_config,"cat >> /etc/openvpn/auth_config.conf <<EOF\n#!/bin/bash\n#兼容配置文件 此文件格式既可以适应shell也可以适应FasAUTH，但是这里不能使用变量，也不是真的SHELL文件，不要写任何shell在这个文件\n#FasAUTH监控系统配置文件\n#请谨慎修改\n#数据库地址\nmysql_host=%s\n#数据库用户\nmysql_user=%s\n#数据库密码\nmysql_pass=%s\n#数据库端口\nmysql_port=%s\n#数据库端口\nmysql_data=vpndata\n#本机地址\naddress=%s\n#指定异常记录回收时间 单位s 600即为十分钟\nunset_time=600\n#删除僵尸记录地址\ndel=\"/root/res/del\"\n\n#进程1监控地址\nstatus_file_1=\"/var/www/html/openvpn_api/online_1194.txt 7075 1194 tcp-server\"\nstatus_file_2=\"/var/www/html/openvpn_api/online_1195.txt 7076 1195 tcp-server\"\nstatus_file_3=\"/var/www/html/openvpn_api/online_1196.txt 7077 1196 tcp-server\"\nstatus_file_4=\"/var/www/html/openvpn_api/online_1197.txt 7078 1197 tcp-server\"\nstatus_file_5=\"/var/www/html/openvpn_api/user-status-udp.txt 7079 53 udp\"\n#睡眠时间\nsleep=3\nEOF",FAS_Node_for_MySQL_IP,FAS_Node_for_MySQL_User,FAS_Node_for_MySQL_Pass,FAS_Node_for_MySQL_Port,IP);
-	setbuf(stdout,NULL);
-	system(ADD_auth_config);
-	//checkcode(runshell(5,ADD_auth_config));
-	checkcode(runshell(5,"chmod -R 0777 /etc/openvpn/auth_config.conf"));
-	
-	
-	//创建新的配置文件config
-	char ADD_config[200];
-	sprintf(ADD_config,"cat >> /var/www/html/config.php <<EOF\n<?php\ndefine(\"_host_\",\"%s\");\ndefine(\"_user_\",\"%s\");\ndefine(\"_pass_\",\"%s\");\ndefine(\"_port_\",\"%s\");\ndefine(\"_ov_\",\"vpndata\");\ndefine(\"_openvpn_\",\"openvpn\");\ndefine(\"_iuser_\",\"iuser\");\ndefine(\"_ipass_\",\"pass\");\ndefine(\"_isent_\",\"isent\");\ndefine(\"_irecv_\",\"irecv\");\ndefine(\"_starttime_\",\"starttime\");\ndefine(\"_endtime_\",\"endtime\");\ndefine(\"_maxll_\",\"maxll\");\ndefine(\_other_\",\"dlid,tian\");\ndefine(\"_i_\",\"i\");\nEOF",FAS_Node_for_MySQL_IP,FAS_Node_for_MySQL_User,FAS_Node_for_MySQL_Pass,FAS_Node_for_MySQL_Port);
-	setbuf(stdout,NULL);
-	system(ADD_config);
-	//checkcode(runshell(5,ADD_config));
-	checkcode(runshell(5,"chmod -R 0777 /var/www/html/config.php"));
-	
-	setbuf(stdout,NULL);
-	system("vpn restart");
-	printf("\n操作已完成。 \n");
-	exit(0);
-	
-	
-	
-	
-	
-	
-	
-}
-
-void FAS_Load(char* IP)
-{
-	
-	//系统负载
-	setbuf(stdout,NULL);
-	system("clear");
-	sleep(1);
-	int Author1;
-		printf("\n请选择安装类型：\n");
-		printf("1.主机开启远程数据库访问权限(只需要开启一次)\n");
-		printf("2.节点机器对接主机数据库(也可以直接对接云库)\n");
-		printf("3.退出脚本\n");
-		printf("\n");
-		printf("请选择[1-3]: ");
-		scanf("%d",&Author1);
-		char hc111[1];
-		gets(hc111);
-			
-	switch(Author1)
-	{
-		case 1:
-			FAS_On_MySQL(IP);
-		break;
-
-		case 2:
-			FAS_Node_for_MySQL(IP);
-		break;
-		
-		case 3:
-			printf("\n脚本结束。\n");
-			exit(0);
-		break;
-			
-			
-			
-		default:
-		printf("\n输入错误，请重新运行脚本\n");
-		exit(0);
-		
-	}
-	
-	
-}
-*/
 
 void CentOS_Update()
 {
@@ -944,10 +723,12 @@ void Install_FAS(char* IP)
 	}
 	
 	printf("\n请输入SSH端口: ");
-	char FAS_SSH_Port[20];
+	char FAS_SSH_Port[100];
 	gets(FAS_SSH_Port);
 	if (strcmp(FAS_SSH_Port,"")==0){
-		strcpy(FAS_SSH_Port,"22");
+		//获取SSH端口号
+		strcpy(FAS_SSH_Port,cmd_system("echo `netstat -tulpn | grep sshd | awk '{print $4}' | cut -d: -f2` | tr -d '\n'"));
+		//strcpy(FAS_SSH_Port,"22");
 		printf("已输入SSH端口为: %s\n",FAS_SSH_Port);
 	}else{
 		printf("已输入SSH端口为: %s\n",FAS_SSH_Port);
@@ -1009,7 +790,7 @@ void Install_FAS(char* IP)
 	sleep(1);
 	printf("\n请选择下载源");
 	printf("\n1、GitHub ");
-	printf("\n2、Other(私有源) ");
+	printf("\n2、Shirley's (服务器有效期至2025-02-12 00:00:00) ");
 	printf("\n");
 	printf("\n请选择[1-2]: ");
 	char Download_Host_Select[20];
@@ -1021,14 +802,43 @@ void Install_FAS(char* IP)
 		strcpy(Download_Host,"https://raw.githubusercontent.com/Shirley-Jones/FAS-Panel/master/Source");
 	}else if (strcmp(Download_Host_Select,"2")==0){
 		//资源2地址
-		printf("你已选择 2、Other(私有源)\n");
-		strcpy(Download_Host,"http://hk.shirleychen.top:8888/fas/Source");
+		printf("你已选择 2、Shirley's\n");
+		strcpy(Download_Host,"http://api.qiaouu.top/shell/fast_resources");
 	}else{
 		//默认资源地址
 		printf("你已选择 1、GitHub\n");
 		strcpy(Download_Host,"https://raw.githubusercontent.com/Shirley-Jones/FAS-Panel/master/Source");
 	}
 	
+	
+	printf("\n-----------流量监控选择-----------");
+	printf("\n");
+	printf("\n因FAS官方流量监控没有开源,所以Shirley基于FAS流控开发的新版流量监控");
+	printf("\n兼容FAS原版配置文件,完美适配FAS流控,并且它是开源项目,您可以安心使用.");
+	printf("\n项目地址: https://github.com/Shirley-Jones/Shirley-FAS-AUTH");
+	printf("\n");
+	sleep(1);
+	printf("\n请选择流量监控版本");
+	printf("\n1、Shirley's 流量监控 (推荐) ");
+	printf("\n2、FAS官方 流量监控 ");
+	printf("\n");
+	printf("\n请选择[1-2]: ");
+	char Monitor_Select[20];
+	char FAS_Monitor[100];
+	gets(Monitor_Select);
+	if (strcmp(Monitor_Select,"1")==0){
+		//资源1地址
+		printf("你已选择 1、Shirley's 流量监控 (推荐) \n");
+		strcpy(FAS_Monitor,"Shirley");
+	}else if (strcmp(Monitor_Select,"2")==0){
+		//资源2地址
+		printf("你已选择 2、Shirley's\n");
+		strcpy(FAS_Monitor,"FAS");
+	}else{
+		//默认资源地址
+		printf("你已选择 1、Shirley's 流量监控 (推荐) \n");
+		strcpy(FAS_Monitor,"Shirley");
+	}
 	
 	sleep(1);
 	//printf("\n");
@@ -1048,12 +858,12 @@ void Install_FAS(char* IP)
 	
 	if (strcmp(FAS_Yum_Mkdir,"Y")==0){
 		//相同
-		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
     }else if (strcmp(FAS_Yum_Mkdir,"y")==0){
 		//相同
-		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
 	}else{
-		Install_Iptables(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+		Install_Iptables(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
 	}
 	
 	
@@ -1062,7 +872,7 @@ void Install_FAS(char* IP)
 }
 
 
-int Recreate_Yum(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Recreate_Yum(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1087,12 +897,12 @@ int Recreate_Yum(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_My
 		Start_Progress_bar("正在重建Yum仓库...",Process_pid);
 	}
 	
-	Install_Iptables(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+	Install_Iptables(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
 	
 	exit(0);
 }
 
-int Install_Iptables(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Install_Iptables(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {		
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1164,12 +974,12 @@ int Install_Iptables(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FA
 		Start_Progress_bar("正在安装并配置防火墙...",Process_pid);
 	}
 	
-	Install_System_environment(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type); 
+	Install_System_environment(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor); 
 	
 	exit(0);
 }
 
-int Install_System_environment(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Install_System_environment(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1187,13 +997,13 @@ int Install_System_environment(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Por
 	}
 	
 	
-    Install_LAMP(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);  
+    Install_LAMP(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);  
 	
 	exit(0);
 }
 	
 	
-int Install_LAMP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Install_LAMP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {	
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1241,13 +1051,13 @@ int Install_LAMP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_My
 	}
 	
 	
-    Install_FAS_Core(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);  
+    Install_FAS_Core(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);  
 	
 	exit(0);
 }
 
 
-int Install_FAS_Core(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Install_FAS_Core(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	//安装 FAS Core
 	pid_t Process_pid;
@@ -1392,7 +1202,7 @@ int Install_FAS_Core(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FA
 	}
 	
 	
-    Install_FASPanel(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type); 
+    Install_FASPanel(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor); 
 	
 	exit(0);
 	
@@ -1400,7 +1210,7 @@ int Install_FAS_Core(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FA
 
 
 
-int Install_FASPanel(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Install_FASPanel(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1468,10 +1278,10 @@ int Install_FASPanel(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FA
 	//安装类型判断
 	if (strcmp(Installation_type,"complete_installation")==0){
 		//完整安装
-		Make_APP(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);  
+		Make_APP(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);  
     }else if (strcmp(Installation_type,"node_installation")==0){
 		//节点安装
-		Performing_final_operation(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);  
+		Performing_final_operation(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);  
 	}else{
 		printf("\n程序逻辑错误！脚本终止!\n");
 		exit(1);
@@ -1481,7 +1291,7 @@ int Install_FASPanel(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FA
     
 }
 
-int Make_APP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Make_APP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1549,7 +1359,7 @@ int Make_APP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_
 	}
 	
 	
-    Performing_final_operation(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);  
+    Performing_final_operation(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);  
 	
 	
 	exit(0);
@@ -1558,7 +1368,7 @@ int Make_APP(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_
 }
 	
 
-int Performing_final_operation(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+int Performing_final_operation(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	pid_t Process_pid;
 	Process_pid = fork();
@@ -1580,13 +1390,29 @@ int Performing_final_operation(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Por
 		checkcode(runshell(5,"chmod +x /etc/rc.d/rc.local"));
 		checkcode(runshell(5,"echo \"$RANDOM$RANDOM\">/var/www/auth_key.access"));
 		
+		
+		if (strcmp(FAS_Monitor,"Shirley")==0){
+			//替换新版监控
+			char Download_Shirley_Monitor[100];
+			sprintf(Download_Shirley_Monitor,"wget --no-check-certificate -O /root/Shirley_FasAUTH.zip %s/Shirley_FasAUTH.zip >/dev/null 2>&1",Download_Host);
+			checkcode(runshell(5,Download_Shirley_Monitor));
+			setbuf(stdout,NULL);
+			system("cd /root && unzip -o Shirley_FasAUTH.zip >/dev/null 2>&1");
+			checkcode(runshell(5,"rm -rf /root/Shirley_FasAUTH.zip"));
+			checkcode(runshell(5,"rm -rf /bin/FasAUTH.bin"));
+			checkcode(runshell(5,"rm -rf /FAS/bin/FasAUTH.bin"));
+			checkcode(runshell(5,"killall -9 /bin/FasAUTH.bin >/dev/null 2>&1"));
+			checkcode(runshell(5,"cp /root/Shirley_FasAUTH.bin /bin/FasAUTH.bin"));
+			checkcode(runshell(5,"chmod -R 0777 /bin/FasAUTH.bin"));
+		}
+		
 		return 0;
 	}else{
 		//while(kill(0,pid) != 0);
 		Start_Progress_bar("正在执行最后的操作...",Process_pid);
 	}
 	
-	Install_complete(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type); 
+	Install_complete(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor); 
 	
 	
 	exit(0);
@@ -1595,7 +1421,7 @@ int Performing_final_operation(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Por
 }
 
 
-void Install_complete(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type)
+void Install_complete(char* IP,char* FAS_MySQL_Host,char* FAS_MySQL_Port,char* FAS_MySQL_User,char* FAS_MySQL_Pass,char* FAS_APP_Name,char* FAS_SSH_Port,char* DNS_IP,char* Download_Host,char* Installation_type,char* FAS_Monitor)
 {
 	setbuf(stdout,NULL);
 	system("vpn restart");
@@ -1730,10 +1556,12 @@ void Install_FAS_Node(char* IP)
 	
 	
 	printf("\n请输入SSH端口: ");
-	char FAS_SSH_Port[20];
+	char FAS_SSH_Port[100];
 	gets(FAS_SSH_Port);
 	if (strcmp(FAS_SSH_Port,"")==0){
-		strcpy(FAS_SSH_Port,"22");
+		//获取SSH端口号
+		strcpy(FAS_SSH_Port,cmd_system("echo `netstat -tulpn | grep sshd | awk '{print $4}' | cut -d: -f2` | tr -d '\n'"));
+		//strcpy(FAS_SSH_Port,"22");
 		printf("已输入SSH端口为: %s\n",FAS_SSH_Port);
 	}else{
 		printf("已输入SSH端口为: %s\n",FAS_SSH_Port);
@@ -1795,7 +1623,7 @@ void Install_FAS_Node(char* IP)
 	sleep(1);
 	printf("\n请选择下载源");
 	printf("\n1、GitHub ");
-	printf("\n2、Other(私有源) ");
+	printf("\n2、Shirley's (服务器有效期至2025-02-12 00:00:00) ");
 	printf("\n");
 	printf("\n请选择[1-2]: ");
 	char Download_Host_Select[20];
@@ -1807,12 +1635,42 @@ void Install_FAS_Node(char* IP)
 		strcpy(Download_Host,"https://raw.githubusercontent.com/Shirley-Jones/FAS-Panel/master/Source");
 	}else if (strcmp(Download_Host_Select,"2")==0){
 		//资源2地址
-		printf("你已选择 2、Other(私有源)\n");
-		strcpy(Download_Host,"http://hk.shirleychen.top:8888/fas/Source");
+		printf("你已选择 2、Shirley's\n");
+		strcpy(Download_Host,"http://api.qiaouu.top/shell/fast_resources");
 	}else{
 		//默认资源地址
-		printf("系统自动为您选择 1、GitHub\n");
+		printf("你已选择 1、GitHub\n");
 		strcpy(Download_Host,"https://raw.githubusercontent.com/Shirley-Jones/FAS-Panel/master/Source");
+	}
+	
+	
+	printf("\n-----------流量监控选择-----------");
+	printf("\n");
+	printf("\n因FAS官方流量监控没有开源,所以Shirley基于FAS流控开发的新版流量监控");
+	printf("\n兼容FAS原版配置文件,完美适配FAS流控,并且它是开源项目,您可以安心使用.");
+	printf("\n项目地址: https://github.com/Shirley-Jones/Shirley-FAS-AUTH");
+	printf("\n");
+	sleep(1);
+	printf("\n请选择流量监控版本");
+	printf("\n1、Shirley's 流量监控 (推荐) ");
+	printf("\n2、FAS官方 流量监控 ");
+	printf("\n");
+	printf("\n请选择[1-2]: ");
+	char Monitor_Select[20];
+	char FAS_Monitor[100];
+	gets(Monitor_Select);
+	if (strcmp(Monitor_Select,"1")==0){
+		//资源1地址
+		printf("你已选择 1、Shirley's 流量监控 (推荐) \n");
+		strcpy(FAS_Monitor,"Shirley");
+	}else if (strcmp(Monitor_Select,"2")==0){
+		//资源2地址
+		printf("你已选择 2、Shirley's\n");
+		strcpy(FAS_Monitor,"FAS");
+	}else{
+		//默认资源地址
+		printf("你已选择 1、Shirley's 流量监控 (推荐) \n");
+		strcpy(FAS_Monitor,"Shirley");
 	}
 	
 	
@@ -1835,12 +1693,12 @@ void Install_FAS_Node(char* IP)
 	
 	if (strcmp(FAS_Yum_Mkdir,"Y")==0){
 		//相同
-		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
     }else if (strcmp(FAS_Yum_Mkdir,"y")==0){
 		//相同
-		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+		Recreate_Yum(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
 	}else{
-		Install_Iptables(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type);
+		Install_Iptables(IP,FAS_MySQL_Host,FAS_MySQL_Port,FAS_MySQL_User,FAS_MySQL_Pass,FAS_APP_Name,FAS_SSH_Port,DNS_IP,Download_Host,Installation_type,FAS_Monitor);
 	}
 	
 	exit(0);
