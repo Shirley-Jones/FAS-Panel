@@ -5,6 +5,12 @@
 * 带宽：推荐8Mbps以上
 * 网络：必须具有固定公网IP（IPV4）
 
+## 更新日志
+* 最新版更新了新版的流量监控，它由Shirley编写，项目地址 https://github.com/Shirley-Jones/Shirley-FAS-AUTH
+* 其他更新日志请访问 https://github.com/Shirley-Jones/FAS-Panel/blob/main/update_log.md
+
+
+
 ## 安装脚本
 如果出现安装失败，请全格重装系统，手动更新yum源后重新执行安装脚本即可。
 ```shell script
