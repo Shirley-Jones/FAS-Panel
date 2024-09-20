@@ -1,5 +1,11 @@
+## 2024.09.20
+* 更新了V1.1版监控文件
+
+
+
 ## 2024.09.19
 * 现在安装脚本可以自动获取ssh端口了
-* 更新了流量监控文件,项目地址: https://github.com/Shirley-Jones/Shirley-FAS-AUTH
+* 添加流量监控选择
+* 更新了Shirley流量监控文件,项目地址: https://github.com/Shirley-Jones/Shirley-FAS-AUTH
 * 优化了安装脚本
 * 添加了个人服务器用于极速搭建 (服务器有效期至2025-02-12 00:00:00)
