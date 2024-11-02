@@ -57,6 +57,7 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 * 删除这两个文件会导致后台面板不能踢在线用户，重启VPN进程等！
 * 需要删除请输入以下命令: killall -9 fas-service && rm -rf /var/www/html/admin/fas_service.php /root/res/fas-service 
 * 还有一个php文件位于 /var/www/html/system.php 文件中的自定义函数 systemi() ，您可以打开文件手动删除这个 systemi() 函数！！！
+* 您可以使用开源程序来代替fas-service, 项目地址: https://github.com/Shirley-Jones/Socket_Linuxshell
 
 ## 温馨提醒
 * 如果您需要二次开发FAS流控，请注意不要使用FAS的流量监控 FasAUTH.bin ~
