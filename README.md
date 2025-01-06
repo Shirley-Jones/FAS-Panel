@@ -6,6 +6,7 @@
 * 网络：必须具有固定公网IP（IPV4）
 
 ## 更新日志
+* 2025.01.06更新了安装脚本，删除了冗余代码，现在代码更简洁易维护。现在编译不会有任何的警告和报错！
 * 最新版更新了新版的流量监控，它由Shirley编写，项目地址 https://github.com/Shirley-Jones/Shirley-FAS-AUTH
 * 其他更新日志请访问 https://github.com/Shirley-Jones/FAS-Panel/blob/main/update_log.md
 
@@ -18,8 +19,8 @@ wget --no-check-certificate -O fast.bin https://raw.githubusercontent.com/Shirle
 ```
 
 ## 编译说明
-* 先安装GCC: yum -y install gcc gcc++ gdb 
-* 编译 gcc -o fast.bin newfast.c
+* 先安装GCC: yum -y install gcc gcc++ gdb curl curl-devel
+* 编译 gcc -o fast.bin newfast.c -lcurl
 * 执行 ./fast.bin
 
 
