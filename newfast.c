@@ -935,16 +935,10 @@ void Install_FAS(char* IP, char* Installation_type) {
 		
 		if (strcmp(FAS_Monitor,"Shirley")==0){
 			//替换新版监控
-			char Download_Shirley_Monitor[100];
-			sprintf(Download_Shirley_Monitor,"wget --no-check-certificate -O /root/Shirley_FasAUTH.zip %s/Shirley_FasAUTH.zip >/dev/null 2>&1",Download_Host);
-			checkcode(runshell(5,Download_Shirley_Monitor));
-			setbuf(stdout,NULL);
-			system("cd /root && unzip -o Shirley_FasAUTH.zip >/dev/null 2>&1");
-			checkcode(runshell(5,"rm -rf /root/Shirley_FasAUTH.zip"));
 			checkcode(runshell(5,"rm -rf /bin/FasAUTH.bin"));
 			checkcode(runshell(5,"rm -rf /FAS/bin/FasAUTH.bin"));
 			checkcode(runshell(5,"killall -9 /bin/FasAUTH.bin >/dev/null 2>&1"));
-			checkcode(runshell(5,"cp /root/Shirley_FasAUTH.bin /bin/FasAUTH.bin"));
+			checkcode(runshell(5,"cp /FAS/bin/Shirley_FasAUTH.bin /bin/FasAUTH.bin"));
 			checkcode(runshell(5,"chmod -R 0777 /bin/FasAUTH.bin"));
 		}
 		
